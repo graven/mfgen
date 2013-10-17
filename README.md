@@ -1,0 +1,4 @@
+mfgen
+=====
+
+Manifest generator
