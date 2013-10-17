@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="utf-8">
+  <title>Manifest generator</title>
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="bootstrap/css/prettify.css" rel="stylesheet">  
+    <link href="css/flat-ui.css" rel="stylesheet">
+  
+    <link rel="stylesheet" href="css/app.css"/>
+
+    <link rel="shortcut icon" href="images/favicon.ico">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+<body ng-controller="StepsController" onload="prettyPrint()">
+  <div class="container" style="margin-top: 50px">
+    <div class="row">
+      <div class="col-md-4">
+        <ul class="nav nav-list">
+          <li class="nav-header">Launch</li>
+          <li ng-repeat="step in steps">
+            <a href="#" ng-click="setCurrentStep(step)">{{ step.name }}</a>
+          </li>
+        </ul>
+
+        <hr/>
+        <form role="form">
+          <div class="form-group">
+            <label for="nameInput">Name:</label>
+            <input id="nameInput" type="text" ng-model="currentStep.name" class="form-control"></li>
+          </div>
+          <div class="form-group">
+            <label for="phaseInput">Phase:</label>
+            <input id="phaseInput" type="text" ng-model="currentStep.phase" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="actionInput">Action:</label>
+            <select id="ppSelect" ng-model="currentStep.action" ng-options='action for action in ["provisionVms", "chefrun", "execrun", "restcall"]'></select>
+          </div>
+          <div class="form-group">
+            <label for="ppSelect">Preceding phases:</label>
+            <select id="ppSelect" ng-model="currentStep.precedingPhases" ng-options="phase for phase in assemblePhases()"></select>
+          </div>
+        </form>
+
+        <hr/>
+
+        <button ng-click="addEmptyStep()" class="btn btn-embossed">Add new step</button>
+
+        <div>Manifest generator v<span app-version></span></div>
+
+      </div>
+      <div class="col-md-8">
+        <pre style="width: 100%">launch:<span ng-repeat="step in steps">
+  - {{ step.name }}:
+    action: {{ step.action }}
+    phase: {{ step.phase }}
+    precedingPhases: {{ step.precedingPhases }}</span></pre>
+      </div>
+    </div>
+  <div>
+
+  <!-- In production use:
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+  -->
+  <script src="js/jquery-1.8.3.min.js"></script>
+  <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
+  <script src="js/jquery.ui.touch-punch.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/bootstrap-select.js"></script>
+  <script src="js/bootstrap-switch.js"></script>
+  <script src="js/flatui-checkbox.js"></script>
+  <script src="js/flatui-radio.js"></script>
+  <script src="js/jquery.tagsinput.js"></script>
+  <script src="js/jquery.placeholder.js"></script>
+  <script src="js/bootstrap-typeahead.js"></script>
+  <script src="bootstrap/js/google-code-prettify/prettify.js"></script>
+  <script src="lib/angular/angular.js"></script>
+  <script src="lib/angular/angular-route.js"></script> 
+  <script src="js/app.js"></script>
+  <script src="js/services.js"></script>
+  <script src="js/controllers.js"></script>
+  <script src="js/filters.js"></script>
+  <script src="js/directives.js"></script>
+</body>
+</html>
